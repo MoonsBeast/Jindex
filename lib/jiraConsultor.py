@@ -2,6 +2,9 @@ import lib.util as util
 
 from atlassian import Jira
 import re
+import pprint
+
+config = util.retrieveFromYAML("config/config.yml")
 
 class JiraConsultor:
 
@@ -16,7 +19,7 @@ class JiraConsultor:
 
     def setConfigFile(self, pathToConfig: str):
 
-        self.config : dict = util.retrieveFromYAML(pathToConfig)["jiraDomains"]
+        self.config : dict = config["jiraDomains"]
 
     def setDomain(self, domain: str):
 
@@ -33,12 +36,26 @@ class JiraConsultor:
 
         return self.query
     
-    def filterFields(self, filter: str, subset = None) -> list:
+    def findFields(self, fields: list) -> list:
         
-        result = None
-        data = self.query if subset == None else subset
+        result = {}
+        for issue in self.query:
+            for field in fields:
+                
+                if issue["key"] not in result.keys():
+                    result[issue["key"]] = []
 
-        split = filter.split('/')
+                result[issue["key"]].append(self.__filterByPath(field, issue))
+
+        return result
+        
+    
+    def __filterByPath(self, path: str, subset):
+    
+        result = None
+        data = subset
+        
+        split = path.split('/')
         step = split[0]
         filterLeft = "/".join(split[1:])
 
@@ -51,7 +68,7 @@ class JiraConsultor:
             for val in data:
 
                 if len(split) > 1:
-                    result.append(self.filterFields(filterLeft, val))
+                    result.append(self.__filterByPath(filterLeft, val))
 
                 else:
                     return data
@@ -60,10 +77,10 @@ class JiraConsultor:
 
             if re.search("^[-+]?[0-9]+$", step):
                 step = int(step)
-
+                
             data = data[step]
             if len(split) > 1:
-                result = self.filterFields(filterLeft, data)
+                result = self.__filterByPath(filterLeft, data)
 
             else:
                 return data

@@ -5,11 +5,10 @@ jiraDomains:
     user: "rodristaraptor72@gmail.com"
     password: "ATATT3xFfGF0z16aRN1LDUb21aWedBpZ9fzxC00EWD4_cMBn83dfYQ6R4gIKoywW4Fq6vkkAO0U-hAs5MQIiMRfupSPCZQ-atSZ1N6X0-P-eeDikbWQGtM86eblunGUIVDxdir-I3JjlqX2V4pDbqm02rQBn5gI_315ajxSsc0CRIb5FWUuZAV8=1CDA827A"
     url: "https://testgmv.atlassian.net"
-    query: 'project = testGMV'
+    query: 'project = testGMV order by created ASC'
     fields: 
-      - "*/key"
-      - "*/id"
-      - "*/fields/worklog/worklogs/*/timeSpent"
+      - "id"
+      - "fields/worklog/worklogs/*/timeSpent"
 
   jira1:
     user: "user"
@@ -19,4 +18,7 @@ jiraDomains:
       - id
       - date
       - completion
+
+config:
+  output: "output/"
 ...
