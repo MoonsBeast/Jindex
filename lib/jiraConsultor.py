@@ -2,41 +2,33 @@ import lib.util as util
 
 from atlassian import Jira
 import re
-import pprint
 
 config = util.retrieveFromYAML("config/config.yml")
 
 class JiraConsultor:
 
-    def __init__(self, pathToConfig: str, domain: str) -> None:
+    def __init__(self, domain: str) -> None:
 
-        self.setConfigAndDomain(pathToConfig,domain)
-
-    def setConfigAndDomain(self, pathToConfig: str, domain: str):
-
-        self.setConfigFile(pathToConfig)
         self.setDomain(domain)
 
-    def setConfigFile(self, pathToConfig: str):
-
-        self.config : dict = config["jiraDomains"]
-
-    def setDomain(self, domain: str):
+    def setDomain(self, domain: str) -> None:
 
         self.domain : str = domain
-        self.domainAtributes : str = self.config[self.domain]
+        self.domainAtributes : str = config["jiraDomains"][self.domain]
 
-    def login(self) -> Jira:
+    def login(self) -> None:
 
+        print("Connecting...")
         self.__jiraConnection = Jira(url = self.domainAtributes["url"], username = self.domainAtributes["user"], password = self.domainAtributes["password"], cloud=True)
 
     def requestIssues(self) -> dict:
 
+        print(f"Requesting issues for \"{self.domain}\"...")
         self.query = self.__jiraConnection.jql(self.domainAtributes["query"])["issues"]
 
         return self.query
     
-    def findFields(self, fields: list) -> list:
+    def findFields(self, fields: list) -> dict:
         
         result = {}
         for issue in self.query:
@@ -47,8 +39,7 @@ class JiraConsultor:
 
                 result[issue["key"]].append(self.__filterByPath(field, issue))
 
-        return result
-        
+        return result      
     
     def __filterByPath(self, path: str, subset):
     

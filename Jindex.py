@@ -8,8 +8,8 @@ from lib.exportManager import ExportManager
 @click.option("-p", "--profile",default="default", type=str)
 @click.pass_context
 def jindex(ctx,profile):
-    jira = JiraConsultor("./config/options.yml",profile)
-
+    jira = JiraConsultor(profile)
+    
     jira.login()
     jira.requestIssues()
 
@@ -22,7 +22,7 @@ def test(ctx):
 
     jira : JiraConsultor = ctx.obj["jira"]
 
-    pprint.pp(jira.requestIssues()[0])
+    pprint.pp(jira.query[0])
 
 @jindex.command()
 @click.pass_context
@@ -30,6 +30,8 @@ def print(ctx):
 
     jira : JiraConsultor = ctx.obj["jira"]
 
+    headers = ["key"] + [x.split("/")[-1] for x in jira.domainAtributes["fields"]]
+    pprint.pp(headers)
     pprint.pp(jira.findFields(jira.domainAtributes["fields"]))
 
 @jindex.command()

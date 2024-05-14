@@ -10,14 +10,14 @@ jiraDomains:
       - "id"
       - "fields/worklog/worklogs/*/timeSpent"
 
-  jira1:
-    user: "user"
-    password: "pass"
-    url: "unaurl.com"
+  jiraTest1:
+    user: "unCorreo@dominio.com"
+    password: "un-token-de-jira"
+    url: "https://tu.jira.net"
+    query: 'project = superProyecto order by created ASC'
     fields: 
-      - id
-      - date
-      - completion
+      - "id"
+      - "fields/worklog/worklogs/*/timeSpent"
 
 config:
   output: "output/"

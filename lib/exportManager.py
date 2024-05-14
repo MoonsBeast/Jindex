@@ -8,7 +8,6 @@ class ExportManager:
 
     def __init__(self) -> None:
         self.row, self.col = 2,2
-        self.masterRowPointer = 2
 
     def exportToExcel(self, header: list, data: dict) -> None:
         
@@ -35,8 +34,7 @@ class ExportManager:
         now = datetime.now()
         dt_string = now.strftime("%d%m%Y_%H%M%S")
 
-        #wb.save(f"{config["config"]["output"]}report_{dt_string}.xlsx")
-        wb.save(f"{config["config"]["output"]}test.xlsx")
+        wb.save(f"{config["config"]["output"]}report_{dt_string}.xlsx")
 
     def __digest(self, data: any, func, horizontalWrite = True) -> None:
 
