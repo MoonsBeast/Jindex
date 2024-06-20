@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  fastapi:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: fastapi
+    container_name: fastapi
+    working_dir: /code
+    ports: 
+      - "8000:8000"
+    volumes:
+      - ../mainFAPI.py:/code/mainFAPI.py
+      - ../Jindex.py:/code/Jindex.py
+      - ../config:/code/config
+      - ../lib:/code/lib
+      - ../output:/code/output

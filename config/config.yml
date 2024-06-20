@@ -2,26 +2,24 @@
 jiraDomains:
 
   default:
-    user: "email@yourjira.com"
-    password: "aTotallyRealToken"
-    url: "https://myjira.atlassian.net"
-    query: 'project = "Project" AND status = Done'
+    user: "rodristaraptor72@gmail.com"
+    password: "ATATT3xFfGF0z16aRN1LDUb21aWedBpZ9fzxC00EWD4_cMBn83dfYQ6R4gIKoywW4Fq6vkkAO0U-hAs5MQIiMRfupSPCZQ-atSZ1N6X0-P-eeDikbWQGtM86eblunGUIVDxdir-I3JjlqX2V4pDbqm02rQBn5gI_315ajxSsc0CRIb5FWUuZAV8=1CDA827A"
+    url: "https://testgmv.atlassian.net"
+    query: 'project = "Proyecto Chachi Pistachi" AND status = Done'
     fields: 
       - "id"
       - "fields/worklog/worklogs/*/timeSpent"
       - "fields/worklog/worklogs/*/author/emailAddress"
       - "fields/worklog/worklogs/*/author/displayName"
 
-  secondProfile:
-    user: "email@yourjira.com"
-    password: "aTotallyRealToken"
-    url: "https://myjira.atlassian.net"
-    query: 'project = "Project" AND status = Done'
+  p2:
+    user: "rodristaraptor72@gmail.com"
+    password: "ATATT3xFfGF0z16aRN1LDUb21aWedBpZ9fzxC00EWD4_cMBn83dfYQ6R4gIKoywW4Fq6vkkAO0U-hAs5MQIiMRfupSPCZQ-atSZ1N6X0-P-eeDikbWQGtM86eblunGUIVDxdir-I3JjlqX2V4pDbqm02rQBn5gI_315ajxSsc0CRIb5FWUuZAV8=1CDA827A"
+    url: "https://testgmv.atlassian.net"
+    query: 'project = "Proyecto Super Serio" AND status = Done'
     fields: 
       - "id"
       - "fields/worklog/worklogs/*/timeSpent"
-      - "fields/worklog/worklogs/*/author/emailAddress"
-      - "fields/worklog/worklogs/*/author/displayName"
 
 config:
   output: "output/"
